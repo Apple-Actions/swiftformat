@@ -1,3 +1,3 @@
 struct Ok {
-  let value: Int
+    let value: Int
 }
