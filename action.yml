@@ -1,0 +1,39 @@
+name: 'SwiftFormat'
+description: 'Install a pinned SwiftFormat and lint with GitHub Actions annotations.'
+author: 'Apple Github Actions (iOS & macOS)'
+inputs:
+  version:
+    description: 'SwiftFormat version (for example 0.64.4) or latest. Wins over version-file if both are set.'
+    required: false
+  version-file:
+    description: 'Path to a file whose first non-empty, non-# line is the SwiftFormat version (for example .swiftformat-version).'
+    required: false
+  path:
+    description: 'Path to lint. Defaults to the repository root when omitted.'
+    required: false
+  args:
+    description: 'Extra arguments appended to swiftformat (for example --lint is added automatically).'
+    required: false
+  reporter:
+    description: 'SwiftFormat reporter. github-actions-log posts annotations on the check.'
+    required: false
+    default: 'github-actions-log'
+  lint:
+    description: 'Pass --lint so files that would change fail the step.'
+    required: false
+    default: 'true'
+  token:
+    description: 'GitHub token used to resolve latest and download release assets (avoids API rate limits).'
+    required: false
+    default: ${{ github.token }}
+outputs:
+  version:
+    description: 'Resolved SwiftFormat version that was installed.'
+  swiftformat-path:
+    description: 'Absolute path to the swiftformat binary.'
+runs:
+  using: 'node24'
+  main: 'dist/index.js'
+branding:
+  icon: 'check'
+  color: 'orange'
